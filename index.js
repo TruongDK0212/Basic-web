@@ -4,7 +4,7 @@ req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 req.addEventListener("load", function() {
     console.log(req.status);
     var data1 = req.responseText;
-    var data2 = data1.replace(/21\",/g, '21\"');
+    var data2 = data1.replace(/22\",/g, '22\"');
     var data3 = JSON.parse(data2);
     var data4 = data3.data.users;
     insertTable(data4);
