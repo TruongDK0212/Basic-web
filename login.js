@@ -1,20 +1,35 @@
-function submit() {
-    var user = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-    var req = new XMLHttpRequest();
-    req.open("POST", "https://azure-tender-judo.glitch.me/v1/auth", true);
-    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    req.addEventListener("load", function() {
-        console.log(req.status);
-        console.log(req.responseType);
-    });
-    req.addEventListener("error", function () {
-        console.log("Error occurred!");
-      });
-    var acc = {
-        username: user,
-        password: password,
+function onSubmit() {
+    try {
+        // var user = document.getElementById('user').value;
+        // var password = document.getElementById('password').value;
+        var user = $('#user');
+        var password = $('#password');
+        var acc = {
+            username: user,
+            password: password,
+        }
+        requestCommon("POST", "auth", acc, function(status, text) {
+            console.log('output ', status, text);
+            setStatusLogin(status);
+            redirectPage();
+        });
+    } catch (error) {
+        console.log(error);
     }
-    req.send(JSON.stringify(acc));
-    alert('done');
 }
+
+function setStatusLogin(status) {
+    if (status == 200) {
+        window.localStorage.setItem('is_login', 'true');
+    } else {
+        window.localStorage.setItem('is_login', 'false');
+    }
+}
+
+function redirectPage() {
+    if (window.localStorage.getItem('is_login') == 'true') {
+        window.location.href = "index.html";
+    }
+}
+
+

@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/sticky-footer/">
+    <script src="common.js"></script>
     <script src="index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>VNPay</title>
 </head>
-<body>
+<body onload="checkLogin()">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
       <a class="navbar-brand mb-2" href="index.html">
@@ -19,19 +20,19 @@
       </a>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link px-4 h4" href="#">Tin tức</a>
+          <a class="nav-link px-4 h4" href="#">Nav1</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link px-4 h4" href="#">Liên hệ</a>
+          <a class="nav-link px-4 h4" href="#">Nav2</a>
         </li>
         <li class="nav-item dropdown px-4 h4">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Dịch vụ
+            DropDown
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Ví VnPay</a>
-            <a class="dropdown-item" href="#">Mobile Banking</a>
-            <a class="dropdown-item" href="#">VNPay QR</a>
+            <a class="dropdown-item" href="#">Item1</a>
+            <a class="dropdown-item" href="#">Item2</a>
+            <a class="dropdown-item" href="#">Item3</a>
           </div>
         </li>
       </ul>

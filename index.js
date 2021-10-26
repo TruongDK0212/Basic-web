@@ -1,18 +1,15 @@
-var req = new XMLHttpRequest();
-req.open("GET", "https://zll4e.mocklab.io/v1/users", true);
-req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-req.addEventListener("load", function() {
-    console.log(req.status);
-    var data1 = req.responseText;
-    var data2 = data1.replace(/22\",/g, '22\"');
-    var data3 = JSON.parse(data2);
-    var data4 = data3.data.users;
-    insertTable(data4);
-});
-req.addEventListener("error", function () {
-    console.log("Error occurred!");
-});
-req.send(null);
+try {
+    requestCommon("GET", "users", null, function(status, res) {
+        if (res) {
+            const user = res.data.users;
+            insertTable(user);
+        } else {
+            alert(status);
+        }
+    }) 
+} catch (error) {
+    console.log("error");
+}
 
 function insertTable(x) {
     var table = document.getElementById('addData');
@@ -27,5 +24,8 @@ function insertTable(x) {
     });
     table.innerHTML = s;
 }
-
-
+function checkLogin() {
+    if (window.localStorage.getItem('is_login') == 'false') {
+        window.location.href = "login.html";
+    }
+}
