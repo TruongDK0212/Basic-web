@@ -26,7 +26,7 @@ function parseJSON(text) {
     }
     text = text
         .replace(/\n|\r\|\t/gi, '')
-        .replace(/"dateAdded": "(.*?)",/gi, '"dateAdded": "$1"');;
+        .replace(/"dateAdded": "(.*?)",/gi, '"dateAdded": "$1"');
     text = JSON.parse(text);
     return text;
 }
