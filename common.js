@@ -1,12 +1,12 @@
+// Hàm giao tiếp chung với API qua XHR
 function requestCommon(method, api_path, data, callback) {
     try {
         var req = new XMLHttpRequest();
         req.open(method, "https://zll4e.mocklab.io/v1/" + api_path, true);
         req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         req.addEventListener("load", function () {
-            console.log(req.status);
             if (req.status == 200) {
-                callback(req.status, parseJSON(req.responseText)); 
+                callback(req.status, req.responseText); 
             } else {
                 callback(req.status)
             }
@@ -20,6 +20,7 @@ function requestCommon(method, api_path, data, callback) {
     }
 }
 
+// Chỉnh sửa dữ liệu nhận từ Server
 function parseJSON(text) {
     if (!text) {
         return ;

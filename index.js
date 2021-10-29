@@ -2,7 +2,7 @@
 try {
     requestCommon("GET", "users", null, function (status, res) {
         if (res) {
-            const user = res.data.users;
+            const user = parseJSON(res).data.users;
             insertTable(user);
         } else {
             alert(status);
@@ -24,8 +24,8 @@ function insertTable(x) {
             <td>${e.firstName}</td>
             <td>${e.lastName}</td>
             <td>${e.email}</td>
-            <td><button type="button" class="btn btn-danger" onClick="removeUser('${e.id}', ${i})">Delete</button>
-            <button type="button" class="btn btn-primary" onClick="editUser('${e.id}', '${e.firstName}', '${e.lastName}', '${e.email}', ${i})" data-toggle="modal" data-target="#formEdit">Edit</button>
+            <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDone" onClick="removeUser('${e.id}', ${i})"><i class="material-icons" title="Delete">&#xE872;</i></button>
+            <button type="button" class="btn btn-success" onClick="editUser('${e.id}', '${e.firstName}', '${e.lastName}', '${e.email}', ${i})" data-toggle="modal" data-target="#formEdit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
             </td>
             </tr>`;
         i++;
@@ -40,16 +40,47 @@ function checkLogin() {
     }
 }
 
+// var rs;
+// function continueDelete() {
+//     var result = comfirm("Are you sure?");
+//     rs = result;
+// }
+//  // Xóa người dùng khỏi danh sách
+// function removeUser(id_user, i) {
+//     if (rs) {
+//         // Xóa dữ liệu ng dùng trên server
+//         requestCommon("DELETE", "users/" + id_user, null, function (status, res) {
+            
+//         });
+    
+//         // Xóa dữ liệu người dùng trên bảng
+//         var userAccount = document.querySelector('.user_'+i);
+//         if (userAccount) {
+//             userAccount.remove();
+//         }
+//         checkDelete = 0;
+//     } else {
+//         return;
+//     }
+// }
 
- // Xóa người dùng khỏi danh sách
+
+// Xóa người dùng khỏi danh sách
+var i_continue;
+var id_continue;
+
 function removeUser(id_user, i) {
+    i_continue = i;
+    id_continue = id_user;
+}
+function continueDelete() {
     // Xóa dữ liệu ng dùng trên server
-    requestCommon("DELETE", "users/" + id_user, null, function (status, res) {
-        alert(res.data.message +" "+ status);
+    requestCommon("DELETE", "users/" + id_continue, null, function (status, res) {
+        
     });
 
     // Xóa dữ liệu người dùng trên bảng
-    var userAccount = document.querySelector('.user_'+i);
+    var userAccount = document.querySelector('.user_'+i_continue);
     if (userAccount) {
         userAccount.remove();
     }
@@ -75,15 +106,16 @@ function addUser() {
         <td>`+first_name+`</td>
         <td>`+last_name+`</td>
         <td>`+email+`</td>
-        <td><button type="button" class="btn btn-danger" onClick="removeUser('${id}', ${i})">Delete</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formEdit">Edit</button>
+        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDone" onClick="removeUser('${id}', ${i})"><i class="material-icons" title="Delete">&#xE872;</i></button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formEdit" onClick="editUser('${id}', '${first_name}', '${last_name}', '${email}', ${i})"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
         </td>
         </tr>`;
     i++;
-    document.getElementById('addData').innerHTML += s;
+    // document.getElementById('addData').innerHTML += s;
+    $(s).insertBefore('table > tbody > tr:first');
 
     requestCommon ("POST", "users", data, function(stt) {
-        alert('Trạng thái add thêm: '+ stt);
+        
     })
 }
 
@@ -107,7 +139,7 @@ function saveChange(user_id) {
         email: document.getElementById('edit_email').value
     }
     requestCommon("PUT", "users/"+user_id, userInfor, function (status, res) {
-        alert("Trang thai: "+ status);
+        
     })
 
     var newRow =`<tr class="user_${current_i}">
@@ -115,9 +147,15 @@ function saveChange(user_id) {
     <td>`+document.getElementById('edit_fn').value+`</td>
     <td>`+document.getElementById('edit_ln').value+`</td>
     <td>`+document.getElementById('edit_email').value+`</td>
-    <td><button type="button" class="btn btn-danger" onClick="removeUser('${userInfor.id}', ${current_i})">Delete</button>
-    <button type="button" class="btn btn-primary" onClick="editUser('${userInfor.id}', '${userInfor.firstName}', '${userInfor.lastName}', '${userInfor.email}', ${current_i})" data-toggle="modal" data-target="#formEdit">Edit</button>
+    <td><button type="button" class="btn btn-danger" data-toggle="modal" onClick="removeUser('${userInfor.id}', ${current_i})" data-target="#deleteDone"><i class="material-icons" title="Delete">&#xE872;</i></button>
+    <button type="button" class="btn btn-success" onClick="editUser('${userInfor.id}', '${userInfor.firstName}', '${userInfor.lastName}', '${userInfor.email}', ${current_i})" data-toggle="modal" data-target="#formEdit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
     </td>
     </tr>`;
     $('tr.user_'+current_i).replaceWith(newRow);
+}
+
+// Thoát trang trở về trang đăng nhập
+function logout() {
+    window.localStorage.setItem('is_login', 'false');
+    checkLogin();
 }

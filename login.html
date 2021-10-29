@@ -7,36 +7,31 @@
     <link rel="stylesheet" href="style.css">
     <script src="common.js"></script>
     <script src="login.js" defer></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Login</title>
 </head>
-<body>
+<body id="login_body" onload="checkAuth()">
     <div id="login">
-        <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" onsubmit="return false;">
-                            <h3 class="text-center text-info">Login</h3>
+                            <h3 class="text-center text-info h2">LOGIN</h3>
+                            <div class="warnText">&#9888; Wrong Username or Password!</div>
                             <div class="form-group">
                                 <label for="username" class="text-info">Username:</label><br>
-                                <input type="text" name="username" id="user" class="form-control" value="admin">
+                                <input type="text" name="username" id="user" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input type="text" name="password" id="password" class="form-control" value="admin">
+                                <input type="password" name="password" id="password" class="form-control">
+                                <input type="checkbox" onclick="myFunction()"><span>Show Password</span>
                             </div>
-                            <div class="form-group">
-                                <label for="remember-me" class="text-info">
-                                    <span>Remember me</span> 
-                                    <span>
-                                        <input id="remember-me" name="remember-me" type="checkbox"/>
-                                    </span>
-                                </label>
-                                <br>
-                                <input type="submit" name="submit" onclick="onSubmit()" class="btn btn-info btn-md" value="Submit" />
+                            <div class="form-group text-right">
+                                <button type="submit" id="submit" name="submit" onclick="onSubmit()" class="btn btn-info btn-md">Submit</button>
                             </div>
                         </form>
                     </div>

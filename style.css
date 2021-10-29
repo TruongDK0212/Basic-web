@@ -1,19 +1,64 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #17a2b8;
-  height: 100vh;
+  background-color: #7952b3;
+  height: auto;
 }
-#login .container #login-row #login-column #login-box {
-  margin-top: 120px;
+
+#login {
+  background: #e4d9d9;
   max-width: 600px;
-  height: 320px;
-  border: 1px solid #9C9C9C;
-  background-color: #EAEAEA;
-}
-#login .container #login-row #login-column #login-box #login-form {
+  height: auto;
+  margin-top: 170px;
+  margin-left: 30%;
   padding: 20px;
+  border: 10px double #28a745;
+  border-radius: 20px;
 }
-#login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
+
+#login h3 {
+  color: #7952b3 !important;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: bold;
+}
+
+label.text-info {
+  color: #7952b3 !important;
+  font-size: 20px;
+  margin-left: -40px;
+}
+
+input[type=text] {
+  width: 300px;
+  margin-left: -40px;
+}
+
+input[type=password] {
+  width: 300px;
+  margin-left: -40px;
+}
+
+button[type=submit] {
+  background: #7952b3;
+  border: none;
+  margin-right: -50px;
+}
+
+button[type=submit]:hover {
+  background: #7e3de0;
+}
+
+button[type=submit]:active {
+  background: #7e3de0 !important;
+}
+
+input[type=checkbox] {
+  margin-left: -40px;
+  margin-top: 10px;
+}
+
+.warnText {
+  display: none;
+  width: 300px;
+  margin-left: -5px;
 }
